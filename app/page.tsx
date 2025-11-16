@@ -53,7 +53,8 @@ export default function HomePage() {
       </Link>
 
       <div className="flex justify-center items-center mt-20">
-        <div className="fitness-form bg-white shadow-md rounded-xl p-8 w-full max-w-lg">
+       <div className="fitness-form bg-white shadow-md rounded-xl p-8 w-full max-w-2xl">
+
           <h2 className="text-2xl font-semibold mb-6 text-center">
             Get Your Personalized Plan
           </h2>
