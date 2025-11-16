@@ -1,9 +1,5 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 @theme inline {
   --color-background: var(--background);
@@ -12,15 +8,98 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.main {
+  background: #E3F2FD;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body{
+  background: #E3F2FD;
+}
+
+#gobackbtn{
+  margin: 20px;
+  border-radius: 30%;
+}
+
+#gobackbtn a{
+  color: #ffff;
+  text-decoration: none;
+}
+
+.fitness-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.response {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  white-space: pre-wrap; 
+}
+.response-box {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 182, 193, 0.25),
+    rgba(173, 216, 230, 0.25)
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 2px solid rgba(255, 182, 193, 0.45);
+  border-radius: 18px;
+  padding: 24px;
+  margin-top: 24px;
+
+  /* ✨ Soft Outer Glow */
+  box-shadow:
+    0 0 18px rgba(255, 182, 193, 0.55),
+    0 0 28px rgba(173, 216, 230, 0.45),
+    0 0 55px rgba(255, 255, 255, 0.25); 
+}
+
+

@@ -1,65 +1,147 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+import Link from "next/link";
+import { FaArrowLeft, FaSync } from "react-icons/fa";
+
+export default function HomePage() {
+  const [fitnessGoal, setFitnessGoal] = useState("Maintain Weight");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [weight, setWeight] = useState("");
+  const [diet, setDiet] = useState("Vegan");
+  const [health, setHealth] = useState("");
+  const [response, setResponse] = useState("");
+
+  const refreshPage = () => {
+    setFitnessGoal("Maintain Weight");
+    setAge("");
+    setGender("");
+    setWeight("");
+    setDiet("Vegan");
+    setHealth("");
+    setResponse("");
+  };
+
+  // ⭐ REACT VERSION of your project.js logic
+  const getRecommendations = async () => {
+    const userMessage = `I'm a pure ${diet} wanting to ${fitnessGoal} of age ${age} weighing ${weight} kgs and of gender ${gender}. ${health}. Give me the perfect diet plan, tailored workout suggestions, nutritional advice, and progress tracking according to my gender, weight, age, diet, fitness goal and especially health condition. (dont send any message related to health condition if not specified and no unhealthy foods. and also fish is not considered vegetarian)`;
+
+    setResponse("Loading... Just a second...");
+
+    try {
+      const res = await fetch("/api/groq", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userMessage }),
+      });
+
+      const data = await res.json();
+      setResponse(data.reply || "No response");
+    } catch (error: any) {
+      setResponse("Error: " + error.message);
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen bg-gray-50 font-[Poppins] p-6 relative">
+      {/* Go Back Button */}
+      <Link href="/">
+        <button className="p-3 bg-gray-200 rounded-full shadow absolute top-5 left-5">
+          <FaArrowLeft />
+        </button>
+      </Link>
+
+      <div className="flex justify-center items-center mt-20">
+        <div className="fitness-form bg-white shadow-md rounded-xl p-8 w-full max-w-lg">
+          <h2 className="text-2xl font-semibold mb-6 text-center">
+            Get Your Personalized Plan
+          </h2>
+
+          <label>Fitness Goal:</label>
+          <select
+            className="input"
+            value={fitnessGoal}
+            onChange={(e) => setFitnessGoal(e.target.value)}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <option>Maintain Weight</option>
+            <option>Gain Muscles</option>
+            <option>Weight Loss</option>
+          </select>
+
+          <label>Age:</label>
+          <input
+            type="number"
+            className="input"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+          />
+
+          <label>Gender:</label>
+          <input
+            type="text"
+            className="input"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          />
+
+          <label>Weight:</label>
+          <input
+            type="number"
+            className="input"
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+          />
+
+          <label>Diet:</label>
+          <select
+            className="input"
+            value={diet}
+            onChange={(e) => setDiet(e.target.value)}
           >
-            Documentation
-          </a>
+            <option>Vegan</option>
+            <option>Vegetarian</option>
+            <option>Eggetarian</option>
+            <option>Non Vegetarian</option>
+          </select>
+
+          <label>Health Conditions:</label>
+          <input
+            type="text"
+            className="input"
+            value={health}
+            onChange={(e) => setHealth(e.target.value)}
+          />
+
+          <button
+            className="w-full bg-black text-white py-2 rounded mt-4"
+            onClick={getRecommendations}
+          >
+            Get Recommendations
+          </button>
+
+
+
+{response && (
+  <div id="response" className="response-box">
+    <pre className="whitespace-pre-wrap leading-7 text-black text-[16px] font-medium">
+      {response}
+    </pre>
+  </div>
+)}
+
+
+
+
         </div>
-      </main>
+      </div>
+
+      <button
+        onClick={refreshPage}
+        className="p-3 bg-gray-200 rounded-full shadow fixed bottom-6 right-6"
+      >
+        <FaSync />
+      </button>
     </div>
   );
 }
