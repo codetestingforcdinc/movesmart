@@ -88,7 +88,9 @@ button {
   );
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-
+  width: 100%;         /* expands fully */
+  max-height: none;    /* allows growth */
+  overflow-y: visible;
   border: 2px solid rgba(255, 182, 193, 0.45);
   border-radius: 18px;
   padding: 24px;
