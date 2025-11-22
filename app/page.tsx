@@ -25,7 +25,7 @@ export default function HomePage() {
 
   // ⭐ REACT VERSION of your project.js logic
   const getRecommendations = async () => {
-    const userMessage = `I'm a pure ${diet} wanting to ${fitnessGoal} of age ${age} weighing ${weight} kgs and of gender ${gender}. ${health}. Give me the perfect diet plan, tailored workout suggestions, nutritional advice, and progress tracking according to my gender, weight, age, diet, fitness goal and especially health condition. (dont send any message related to health condition if not specified and no unhealthy foods. and also fish is not considered vegetarian)`;
+    const userMessage = `I'm a pure ${diet} wanting to ${fitnessGoal} of age ${age} weighing ${weight} kgs and of gender ${gender}. ${health}. Give me the perfect diet plan, tailored workout suggestions, nutritional advice, and progress tracking according to my gender, weight, age, diet, fitness goal and especially health condition. (dont send any message related to health condition if not specified and no unhealthy foods. and also fish is not considered vegetarian). also give names of foods and everything INDIAN SPECIFIC. give their general names and everything.`;
 
     setResponse("Loading... Just a second...");
 
